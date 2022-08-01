@@ -13,18 +13,24 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    # let the user choose the folder containing the tables
+    names = [] #empty list for all filenames, both of these are gonna be our columns in the final csv.
+    pearsons = [] #empty list for alle the pearson coefficients
+    # let the user choose the folder containing the images to be converted
     root_path = filedialog.askdirectory()  # prompts user to choose directory. From tkinter
-    # prints out the number of files in the selected folder with the wanted file format and adds them to a list
-    file_format = ".csv"
-    filenames = [filename for filename in sorted(os.listdir(root_path)) if filename.endswith(file_format) and filename.startswith(("IF"))]
-    # filenames = [filename for filename in sorted(os.listdir(root_path)) if filename.endswith(file_format)]
+
+    # prints out the number of files in the selected folder with the .tiff file format
+    file_ending = "replicate.csv"
+    file_list = []
+    # spaziert durch alle Subdirectories und sucht sich alle Files und packt sie in ne neue Liste, die ich oben neu kreiert habe
+    for root, dirs, files in os.walk(root_path):
+        for name in files:
+            file_list.append(os.path.join(root, name))
+            print(name)
+    print(file_list)
+    filenames = [filename for filename in file_list if filename.endswith(file_ending)]
     print("There are {} files with this format.".format(len(filenames)))
     if not filenames:  # pythonic for if a list is empty
         print("There are no files with this format.")
-
-    names = [] #empty list for all filenames, both of these are gonna be our columns in the final csv.
-    pearsons = [] #empty list for alle the pearson coefficients
 
     for filename in filenames:
         print(filename)
@@ -33,7 +39,7 @@ def main():
         table = pd.read_csv(file_path, encoding='latin1', usecols=["Bax Intensities", "Bak Intensities"])  #latin1 encocing needed in order to be able to read special chars like "µ"
         print(table)
 
-        pearson = table.corr(method="pearson")
+        pearson = table.corr(method="pearson")["Bax Intensities"]["Bak Intensities"]  ##TODO: get all Pearsons, lengths, Bax percent into one big csv
 
         pearson = pearson.iat[0, 1] #as it spits out a correlation matrix between all columns in a dataframe, again as datafram itself, I need to pick the value out of the datafram, then correlates the two columns with each other
         print(pearson)
