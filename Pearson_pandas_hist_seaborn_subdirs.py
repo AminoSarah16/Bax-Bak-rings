@@ -36,10 +36,14 @@ def main():
         print(filename)
         names.append(filename)
         file_path = os.path.join(root_path, filename)
-        table = pd.read_csv(file_path, encoding='latin1', usecols=["Bax Intensities", "Bak Intensities"])  #latin1 encocing needed in order to be able to read special chars like "µ"
+        table = pd.read_csv(file_path, encoding='latin1')  #latin1 encocing needed in order to be able to read special chars like "µ"
         print(table)
 
-        pearson = table.corr(method="pearson")
+        Bax = table["Bax Intensities"]  # in order to calculate the mean of each colum
+        Bak = table["Bak Intensities"]
+
+        pearson = Bax.corr(Bak, method="pearson")
+        print(pearson)
 
         pearson = pearson.iat[0, 1] #as it spits out a correlation matrix between all columns in a dataframe, again as datafram itself, I need to pick the value out of the datafram, then correlates the two columns with each other
         print(pearson)

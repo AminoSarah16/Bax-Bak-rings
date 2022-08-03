@@ -1,7 +1,7 @@
 '''
-This program opens csv files of ring line profiles in one folder.
-Then reads out all Bax and Bak values and calculates the min and max for all the samples in the folder and saves it in a new csv.
-From this it then opens all the csvs again and saves new csvs with normalized values to this general MIN/MAX values..
+This program opens csv files of ring line profiles raw data in one folder.
+Then reads out all Bax and Bak raw values and calculates the min and max for all the samples in the folder and saves it in a new csv.
+This can then be used to ormalize values to this general MIN/MAX values - see other scripts.
 User needs to just run the script, everything else is asked for.
 Göttingen, August 2022, Sarah Vanessa Schweighofer, MPI-NAT
 '''
