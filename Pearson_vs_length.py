@@ -19,7 +19,8 @@ def main():
     df = pd.read_csv(file, encoding='latin1')  # latin1 encocing needed in order to be able to read special chars like "µ"
     print(df)
 
-    plot = sns.scatterplot(x="Pearson coefficient", y="Length", data=df, color="#808080")
+    plot = sns.scatterplot(x="Length", y="Pearson coefficient", data=df, color="#808080")
+    plot.set_ylim(-1, 1)
     plt.plot()
     plt.show()
 
