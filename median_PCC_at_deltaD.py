@@ -53,6 +53,15 @@ def main():
     df = pd.DataFrame(all_pearsons)
     print(df)
 
+    # take the values from certain columns for plotting later:
+    deltaD_0 = list(df.iloc[:, 0]) # i have to cast this into a list here in order to be able to call it in the displot below.. why? no idea. # actually I had to make a new dataframe anyways, but at least that worked now!!!
+    deltaD_6 = list(df.iloc[:, 6]) #at 90 nm
+    deltaD_14 = list(df.iloc[:, 14]) #at 210 nm
+    print(deltaD_0)
+
+    #need to make a new dataframe out of it in order to be able to include it into the displot later!!
+    df3 = pd.concat(axis=0, ignore_index=True, objs=[pd.DataFrame.from_dict({'value': deltaD_0, 'name': 'zero'}), pd.DataFrame.from_dict({'value': deltaD_6, 'name': 'six'}), pd.DataFrame.from_dict({'value': deltaD_14, 'name': 'fourteen'})])
+
     # calculate the median for every column (meaning at every delta d)
     medians = []
     for column in df:
@@ -60,10 +69,26 @@ def main():
         medians.append(median)
 
     print(medians)
+
+    #make delta d series
     delta_d = [i*15 for i in range(len(medians))]
     print(delta_d)
 
-    # TODO: save as csv.
+
+    # create theoutput table
+
+    data = {"delta d": delta_d,
+            "PCC median": medians}
+
+    print(data)
+
+    df2 = pd.DataFrame(data)
+
+    result_path = os.path.join(root_path, 'results')
+    if not os.path.isdir(result_path):
+        os.makedirs(result_path)
+    savepath = os.path.join(result_path, "medianPCC_vs_deltaD.csv")
+    df2.to_csv(savepath)
 
     #################### calcualte some values ###############################
     # make numpy arrays out of the lists in order to do calculations
@@ -110,51 +135,70 @@ def main():
     delta50 = interp_x_from_y(PCC50, x, y)
     print("This is the delta d value in nm where the curve is at 50% from the original PCC: {}".format(delta50))
 
-    ####################### plot all the pearsons against delta D ##################
-    plot = sns.lineplot(x=delta_d[0:21], y=medians[0:21], color="#808080") # [0:21] covers the first 300nm
-    ## TODO: add mean into plot
-    # Größe des finalen Plots
-    plot.figure.set_figwidth(11.7)
-    plot.figure.set_figheight(8.27)
-
-    # ax = plt.gca()
-    # ax.grid(which='zero', axis='both', linestyle='--')
-
-    plot.set_ylim(-0.2, 0.5)
-    plot.set_xlim(0, 300)
-    plt.title('general spatial correlation', fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
-    plt.xlabel('Delta d [nm]', fontsize=20) ##TODO: insert \u0394 as delta symbol
-    plt.ylabel('PCC', fontsize=20)
-    # plt.legend(fontsize=16, title_fontsize=20)
-
-    # add 0 x line
-    plt.axhline(y=0, linewidth=0.5, color='black', linestyle='-')
-
-    # add 0 y line
-    plt.axvline(x=delta_at_y0, color='#80c2d9', linestyle='dashed')
-
-    # add 50% y line
-    plt.axvline(x=delta50, color='green', linestyle='dashed')
-    # # add 50% x line  ##TODO: integrate on the data and plot precisely
-    # plt.axhline(y=medians[int(first_hitting_zero/2)], color='red', linestyle='dashed')
-
-    # Zeigs her
-    plt.plot()
-    plt.show()
+    # ####################### plot all the pearsons against delta D ##################
+    # plot = sns.lineplot(x=delta_d[0:21], y=medians[0:21], color="#808080") # [0:21] covers the first 300nm
+    #
+    # # Größe des finalen Plots
+    # plot.figure.set_figwidth(11.7)
+    # plot.figure.set_figheight(8.27)
+    #
+    # # ax = plt.gca()
+    # # ax.grid(which='zero', axis='both', linestyle='--')
+    #
+    # plot.set_ylim(-0.2, 0.5)
+    # plot.set_xlim(0, 300)
+    # plt.title('general spatial correlation', fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
+    # plt.xlabel('\u0394 d [nm]', fontsize=20) ##TODO: insert \u0394 as delta symbol
+    # plt.ylabel('PCC', fontsize=20)
+    # # plt.legend(fontsize=16, title_fontsize=20)
+    #
+    # # add 0 x line
+    # plt.axhline(y=0, linewidth=0.5, color='black', linestyle='-')
+    #
+    # # add 0 y line
+    # plt.axvline(x=delta_at_y0, color='#80c2d9', linestyle='dashed')
+    #
+    # # add 50% y line
+    # plt.axvline(x=delta50, color='green', linestyle='dashed')
+    # # # add 50% x line
+    # # plt.axhline(y=medians[int(first_hitting_zero/2)], color='red', linestyle='dashed')
+    #
+    # # Zeigs her
+    # plt.plot()
+    # plt.show()
 
     # make histogram at specific delta Ds:
-    hist = sns.displot(x=df[0], kde=True, color="#808080", binwidth=10, binrange=(0, 100), height=8.27, aspect=11.7 / 8.27)  # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
+    # visualize as histogram with seaborn TODO: chose nicer colors and move the legend to the left
+    sns.set_style("white")
+    fig, ax = plt.subplots()
+    hist = sns.displot(data=df3, x="value", hue="name", kde=True, palette=["#808080", "#90ee90", "#80c2d9"], binwidth=0.1, binrange=(-1, 1), height=8.27, aspect=11.7 / 8.27) # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
     # kde = kernel density estimation distribution aka the line over te histogram, length measures in inch!!
-    plt.title('Bax percent in the ring', y=0.97, fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
+    plt.title('Spatial Correlation of Bax and Bak in the ring', y=0.97, fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
-    plt.xlabel('Amount of Bax [%]', fontsize=24)
-    plt.ylabel('Number of rings', fontsize=24)
+    plt.xlabel('Pearson Correlation Coefficients', fontsize=24)
+    plt.ylabel('Count', fontsize=24)
     plt.tight_layout()  # damits keine legends abschneidet und so
     # add the vertical line for the median
-    plt.axvline(x=medians[0], ymax=0.95, color='black', lw=2.5)  # ymax makes the line not go into the title, the variable median comes from above
+    plt.axvline(x=df[0].median(), ymax=0.95, color='black', lw=2.5) # ymax makes the line not go into the title, the variable median comes from above
+    plt.axvline(x=df[6].median(), ymax=0.95, color='green', lw=2.5)
+    plt.axvline(x=0, ymax=0.95, color='#48a2c2', lw=2.5) #because I only have the pcc values slightly above and below zero I cheat here and set the median exactly to zero although this is not exact.
     plt.hist
     plt.show()
+
+
+    # hist = sns.displot(x=all_pearsons[0], kde=True, color="#808080", binwidth=10, binrange=(0, 100), height=8.27, aspect=11.7 / 8.27)  # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
+    # # kde = kernel density estimation distribution aka the line over te histogram, length measures in inch!!
+    # plt.title('Bax percent in the ring', y=0.97, fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
+    # plt.xticks(fontsize=20)
+    # plt.yticks(fontsize=20)
+    # plt.xlabel('Amount of Bax [%]', fontsize=24)
+    # plt.ylabel('Number of rings', fontsize=24)
+    # plt.tight_layout()  # damits keine legends abschneidet und so
+    # # add the vertical line for the median
+    # plt.axvline(x=medians[0], ymax=0.95, color='black', lw=2.5)  # ymax makes the line not go into the title, the variable median comes from above
+    # plt.hist
+    # plt.show()
 
 
 def interp_x_from_y(input, x, y):

@@ -1,4 +1,5 @@
 '''
+NORMALIZATION SCRIPT 2
 This program opens line plot raw csv files.
 Then calculates the relative Bax or Bak values by using the min-max-value csv created with Bax-Bak-min-max_over-replicate.py.
 Then saves a new csv of these relative values.

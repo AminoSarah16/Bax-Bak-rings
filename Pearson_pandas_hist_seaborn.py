@@ -73,6 +73,7 @@ def main():
     plt.title('Spatial Correlation of Bax and Bak in the ring', y=0.97, fontsize=24) # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
+    plt.tick_params(direction='inout', length=6, width=2, colors='k')
     plt.xlabel('Pearson Correlation Coefficients', fontsize=24)
     plt.ylabel('Count', fontsize=24)
     plt.tight_layout() #damits keine legends abschneidet und so

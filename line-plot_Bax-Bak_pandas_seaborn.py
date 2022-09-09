@@ -24,23 +24,24 @@ def main():
 
     #### plot the whole story with pandas/matplotlib ###########################################################################
     my_x_ticks = df["Âµm"]
-    plt.figure(figsize=(11.7, 8.27))
-    plt.plot(my_x_ticks, Bax_int_rel, label='Bax', color='#0EB30E')
-    plt.plot(my_x_ticks, Bak_int_rel, label='Bak', color='#D10FD1')
+    plt.figure(figsize=(12, 8))
+    plt.tight_layout
+    plt.plot(my_x_ticks, Bax_int_rel, label='BAX', color='#0EB30E')
+    plt.plot(my_x_ticks, Bak_int_rel, label='BAK', color='#D10FD1')
 
     plt.xticks(my_x_ticks) #df["nm"]
     plt.locator_params(axis='x', nbins=10)
 
-    # TODO: set size of the tickmark labels with matplotlib
-    # plt.set_xticklabels(plot.get_xticks(), size=16)
-    #     # plot.set_yticklabels(plot.get_yticks(), size=16)
-
     # plt.title('Example line profile', y=0.9, fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=20)
-    plt.xlabel('length [µm]', fontsize=24)
-    plt.ylabel('normalized fluorescence intensity [a.u.]', fontsize=24)
-    plt.legend(fontsize=16, title_fontsize=24, loc="lower right")
+    plt.xticks(fontsize=28, rotation=45)
+    plt.yticks(fontsize=28)
+
+    # sets params for the ticks themselves, not the labels
+    plt.tick_params(direction='inout', length=6, width=2, colors='k') #, grid_color='r', grid_alpha=0.5) #direction : {'in', 'out', 'inout'}: Puts ticks inside the axes, outside the axes, or both.
+
+    plt.xlabel('length [µm]', fontsize=32)
+    plt.ylabel('normalized fluorescence intensity [a.u.]', fontsize=32)
+    plt.legend(fontsize=28, title_fontsize=24, loc="upper right")
 
     plt.show()
     ##############################################################################################################

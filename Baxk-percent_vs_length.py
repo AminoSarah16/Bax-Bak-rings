@@ -32,7 +32,7 @@ def main():
     rollmedians = []
     rollmed_lengths = []
     # take windows of 100 nm
-    window_size = 0.1
+    window_size = 0.4
 
     #create starting value
     x = 0.4
@@ -62,7 +62,7 @@ def main():
         rollmed_lengths.append(x)
 
 
-        x += window_size  # increase x with window size
+        x += window_size/4  # increase x with window size durch 2 oder 4 um wirklich nen rolling zu haben!!!
 
 
     print(length_slices)
@@ -70,10 +70,6 @@ def main():
     print(rollmedians)
     print(len(rollmedians))
     print(len(rollmed_lengths))
-
-    ## TODO: find all the values from the length list in the Bak list and calculate median.
-    # indices of length slices:
-
 
 
 
@@ -101,8 +97,13 @@ def main():
     # add 50% line
     plt.axhline(y=50, color='black', linestyle='-')
 
-    #zeigs her
+    #erstlle den Plot
     plt.plot()
+
+    output_file = "P:/Private/practice/quantification_of_imaging_experiments/manual_ring_quantification_all-rings/result_plots/20220830_Bak_percent_with_rolling-mean.svg"
+    plt.savefig(output_file)
+
+    # zeigs her
     plt.show()
 
 
