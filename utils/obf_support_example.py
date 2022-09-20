@@ -5,7 +5,7 @@
 
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-import obf_support
+from utils import obf_support
 
 if __name__ == '__main__':
     # add a path to an ".obf" or ".msr" file here

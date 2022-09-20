@@ -31,7 +31,7 @@ def main():
     length_slice_indices = []
     rollmedians = []
     rollmed_lengths = []
-    # take windows of 100 nm
+    # take windows of 400 nm
     window_size = 0.4
 
     #create starting value
@@ -76,10 +76,10 @@ def main():
 
     ################################PLOT####################################################
     # sns.scatterplot(x="Length", y="Percent Bax", data=df, color="#0EB30E")
-    sns.scatterplot(x=length, y=Bak_percent, color="#808080")
+    sns.scatterplot(x=length, y=Bak_percent, color="#808080", size= 1, legend=False)
 
     # add rolling median to the plot
-    sns.lineplot(x=rollmed_lengths, y=rollmedians)
+    sns.lineplot(x=rollmed_lengths, y=rollmedians, color="#34e1eb")
 
     # wie weit soll die y axe gehen
     plt.ylim(0, 100)
@@ -87,7 +87,7 @@ def main():
 
     #second y axis für Bax
     ax2 = plt.twinx()
-    sns.scatterplot(x=length, y=Bax_percent, color="#808080", ax=ax2)
+    sns.scatterplot(x=length, y=Bax_percent, color="#808080", size= 1, ax=ax2, legend=False)
     plt.ylim(100, 0)
 
     #Überschrift und axis labels

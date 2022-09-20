@@ -23,9 +23,9 @@ def main():
     ################################################################################################################
 
     #### plot the whole story with pandas/matplotlib ###########################################################################
-    my_x_ticks = df["Âµm"]
+    my_x_ticks = df["µm"] #sometimes it adds this weird charcater: then use df["Âµm"]
     plt.figure(figsize=(12, 8))
-    plt.tight_layout
+
     plt.plot(my_x_ticks, Bax_int_rel, label='BAX', color='#0EB30E')
     plt.plot(my_x_ticks, Bak_int_rel, label='BAK', color='#D10FD1')
 
@@ -41,7 +41,8 @@ def main():
 
     plt.xlabel('length [µm]', fontsize=32)
     plt.ylabel('normalized fluorescence intensity [a.u.]', fontsize=32)
-    plt.legend(fontsize=28, title_fontsize=24, loc="upper right")
+    # plt.legend(fontsize=28, title_fontsize=24, loc="upper right")
+    plt.tight_layout()
 
     plt.show()
     ##############################################################################################################

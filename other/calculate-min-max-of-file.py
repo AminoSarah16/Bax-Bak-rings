@@ -16,13 +16,10 @@ Include Jan's obf_support.py in your project and import it into the code with "i
 Sarah Schweighofer, August 2022, Göttingen, Max Planck Institute for Multidisciplinary sciences.
 '''
 
-
-from utils import *  # need the utils.py file which has auxiliary funcs
-import obf_support
+from utils import obf_support
 from tkinter import filedialog
 import os
 import numpy
-from PIL import Image
 import pandas as pd
 
 

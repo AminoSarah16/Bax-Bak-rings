@@ -6,17 +6,9 @@ Results table obtained from Imaris analysis of 4PiSTORM data of Bax rings
 Göttingen, 28.07.22 Sarah Vanessa Schweighofer, MPI-NAT
 '''
 
-
-import os
-import tkinter as tk
-from tkinter import simpledialog
-from tkinter import filedialog
-import numpy as np
-import pandas as pd
 from matplotlib import pyplot as plt
-import matplotlib.patches as mpatches
 import seaborn as sns
-from utils import *
+from utils.utils import *
 
 def main():
     pd.set_option('display.max_rows', None)  # displays the whole df upon printing, toggle on if needed

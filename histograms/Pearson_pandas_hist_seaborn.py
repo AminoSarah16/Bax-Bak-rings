@@ -67,10 +67,10 @@ def main():
     # plt.show()
 
     # visualize as histogram with seaborn
-    sns.set_style("white")
-    hist = sns.displot(x='pearson coefficient', data=data, kde=True, color="#808080", binwidth=0.1, binrange=(-1, 1), height=8.27, aspect=11.7/8.27) # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
+    sns.set_style("ticks")
+    hist = sns.displot(x='pearson coefficient', data=data, kde=False, color="#808080", binwidth=0.1, binrange=(-1, 1), height=8.27, aspect=11.7/8.27) # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
     # kde = kernel density estimation distribution aka the line over te histogram, length measures in inch!!
-    plt.title('Spatial Correlation of Bax and Bak in the ring', y=0.97, fontsize=24) # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
+    # plt.title('Spatial Correlation of Bax and Bak in the ring', y=0.97, fontsize=24) # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
     plt.tick_params(direction='inout', length=6, width=2, colors='k')

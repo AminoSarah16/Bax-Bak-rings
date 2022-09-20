@@ -4,12 +4,9 @@ Then plots the lengths.
 Göttingen, March 2022, Sarah Vanessa Schweighofer, MPI-NAT
 '''
 
-import os
-from tkinter import filedialog
-import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from utils import *
+from utils.utils import *
 
 
 

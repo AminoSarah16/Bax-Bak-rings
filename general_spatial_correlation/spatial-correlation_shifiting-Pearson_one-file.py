@@ -52,19 +52,29 @@ def main():
     print(pearsons)
     ############################################################################################################
 
-
     ####################### plot all the pearsons against delta D ##################
-    plot = sns.lineplot(x=lengths, y=pearsons, color="#808080")
-
-    # Größe des finalen Plots, sollte A4 sein oder so?
+    plot = sns.lineplot(x=lengths, y=pearsons, color="k", linewidth=3)
+    # Größe des finalen Plots
     plot.figure.set_figwidth(11.7)
     plot.figure.set_figheight(8.27)
 
-    plot.set_ylim(-1, 1)  #damit die y Achse von -1 bis 1 angezeigt wird
-    plt.title('spatial correlation', fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
-    plt.xlabel('Delta d', fontsize=20) ##TODO: insert \u0394 as delta symbol
+    plot.set_ylim(-1, 1)
+    # plt.title('spatial correlation', fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
+    plt.xlabel('\u0394 d [µm]', fontsize=20)  ##TODO: insert \u0394 as delta symbol
     plt.ylabel('Pearson', fontsize=20)
-    plt.legend(fontsize=16, title_fontsize=20)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.tick_params(direction='inout', length=6, width=2, colors='k')
+    # plt.legend(fontsize=16, title_fontsize=20)
+
+    # add mean line
+    plt.axhline(y=0, color='#808080', linestyle='-', linewidth=3)
+
+    # #### add first hitting zero point to graphic ############
+    # plt.scatter(lengths[first_hitting_zero], pearson_arr[first_hitting_zero], s=56, marker="o", c="green")
+    #
+    # #### add first local minimum to graphic ############
+    # plt.scatter(lengths[first_local_mimimum], pearson_arr[first_local_mimimum], s=56, marker="o", c="black")
 
     # Zeigs her
     plt.plot()

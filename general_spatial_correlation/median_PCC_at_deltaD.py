@@ -6,14 +6,9 @@ Göttingen, August 2022, Sarah Vanessa Schweighofer, MPI-NAT
 '''
 
 import os
-from tkinter import filedialog
-import pandas as pd
-import seaborn as sns
-import numpy as np
-import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
-from utils import *
+from utils.utils import *
 
 
 def main():

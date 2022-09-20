@@ -8,14 +8,9 @@ Göttingen, August 2022, Sarah Vanessa Schweighofer, MPI-NAT
 
 
 import os
-from tkinter import filedialog
-import pandas as pd
-import seaborn as sns
-import numpy as np
-import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
-from utils import *
+from utils.utils import *
 
 
 def main():
@@ -125,7 +120,6 @@ def main():
 
         ####################### plot all the pearsons against delta D ##################
         plot = sns.lineplot(x=lengths, y=pearsons, color="#808080")
-        ## TODO: add mean into plot
         # Größe des finalen Plots
         plot.figure.set_figwidth(11.7)
         plot.figure.set_figheight(8.27)
