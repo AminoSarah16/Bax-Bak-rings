@@ -60,11 +60,12 @@ def main():
 
     plot.set_ylim(-1, 1)
     # plt.title('spatial correlation', fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
-    plt.xlabel('\u0394 d [µm]', fontsize=20)  ##TODO: insert \u0394 as delta symbol
+    plt.xlabel('\u0394 d [µm]', fontsize=20)
     plt.ylabel('Pearson', fontsize=20)
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
     plt.tick_params(direction='inout', length=6, width=2, colors='k')
+    plt.gca().yaxis.set_major_locator(plt.MultipleLocator(0.5))
     # plt.legend(fontsize=16, title_fontsize=20)
 
     # add mean line

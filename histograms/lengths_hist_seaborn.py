@@ -23,8 +23,9 @@ def main():
     #### plot the whole story with pandas/matplotlib ###########################################################################
     # visualize as histogram with seaborn
     sns.set_style("ticks")
+    plt.figure(figsize=(9, 6))  # needs to be before the plot call
     # sns.axes_style({'axes.spines.left': True, 'axes.spines.bottom': True, 'axes.spines.right': True, 'axes.spines.top': True})
-    sns.displot(x=length, kde=False, color="#808080", binwidth=0.1, binrange=(0, 4), height=8.27, aspect=11.7/8.27) # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
+    sns.histplot(x=length, kde=True, color="#808080", binwidth=0.1, binrange=(0, 4)) # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
     # kde = kernel density estimation distribution aka the line over te histogram, length measures in inch!!
     # plt.title('Ring sizes', y=0.97, fontsize=24) # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
     # plt.box(on=True)
@@ -35,9 +36,9 @@ def main():
     plt.ylabel('Count', fontsize=24)
     plt.tight_layout() #damits keine legends abschneidet und so
 
-    plt.axvline(x=median, ymax=0.95, color='black', lw=2.5)  # ymax makes the line not go into the title, the variable median comes from above
+
     # add the vertical line for the median
-    plt.hist
+    plt.axvline(x=median, ymax=0.95, color='black', lw=2.5)  # ymax makes the line not go into the title, the variable median comes from above
     plt.show()
 
     ###################################  write text file with median and number of analyzed rings  ###########################################

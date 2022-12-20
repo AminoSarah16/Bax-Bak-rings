@@ -1,7 +1,7 @@
 '''
 This program opens a folder with subfolders with csv files.
 Then plots the deltaD vs median Pearson correlation coefficient.
-Spits out a csv and curve.
+Spits out a csv and curve and histogram.
 Göttingen, August 2022, Sarah Vanessa Schweighofer, MPI-NAT
 '''
 
@@ -150,32 +150,32 @@ def main():
     # # add 0 x line
     # plt.axhline(y=0, linewidth=0.5, color='black', linestyle='-')
     #
-    # # add 0 y line
-    # plt.axvline(x=delta_at_y0, color='#80c2d9', linestyle='dashed')
-    #
-    # # add 50% y line
-    # plt.axvline(x=delta50, color='green', linestyle='dashed')
-    # # # add 50% x line
-    # # plt.axhline(y=medians[int(first_hitting_zero/2)], color='red', linestyle='dashed')
+    # # # add 0 y line
+    # # plt.axvline(x=delta_at_y0, color='#80c2d9', linestyle='dashed')
+    # #
+    # # # add 50% y line
+    # # plt.axvline(x=delta50, color='green', linestyle='dashed')
+    # # # # add 50% x line
+    # # # plt.axhline(y=medians[int(first_hitting_zero/2)], color='red', linestyle='dashed')
     #
     # # Zeigs her
     # plt.plot()
     # plt.show()
 
-    # make histogram at specific delta Ds:
+    ######################### make histogram at specific delta Ds ###############################################
     # visualize as histogram with seaborn TODO: chose nicer colors and move the legend to the left
-    sns.set_style("white")
+    sns.set_style("ticks")
     fig, ax = plt.subplots()
-    hist = sns.displot(data=df3, x="value", hue="name", kde=True, palette=["#808080", "#90ee90", "#80c2d9"], binwidth=0.1, binrange=(-1, 1), height=8.27, aspect=11.7 / 8.27) # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
+    hist = sns.histplot(data=df3, x="value", hue="name", kde=True, palette=["#808080", "#90ee90", "#80c2d9"], binwidth=0.1, binrange=(-1, 1), legend=False) # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
     # kde = kernel density estimation distribution aka the line over te histogram, length measures in inch!!
-    plt.title('Spatial Correlation of Bax and Bak in the ring', y=0.97, fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
+    # plt.title('Spatial Correlation of Bax and Bak in the ring', y=0.97, fontsize=24)  # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
     plt.xlabel('Pearson Correlation Coefficients', fontsize=24)
     plt.ylabel('Count', fontsize=24)
     plt.tight_layout()  # damits keine legends abschneidet und so
     # add the vertical line for the median
-    plt.axvline(x=df[0].median(), ymax=0.95, color='black', lw=2.5) # ymax makes the line not go into the title, the variable median comes from above
+    plt.axvline(x=df[0].median(), ymax=0.95, color='#666666', lw=2.5) # ymax makes the line not go into the title, the variable median comes from above
     plt.axvline(x=df[6].median(), ymax=0.95, color='green', lw=2.5)
     plt.axvline(x=0, ymax=0.95, color='#48a2c2', lw=2.5) #because I only have the pcc values slightly above and below zero I cheat here and set the median exactly to zero although this is not exact.
     plt.hist

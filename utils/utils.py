@@ -54,3 +54,55 @@ def detect_local_minima(arr):
     # by removing the background from the local_min mask
     detected_minima = local_min ^ eroded_background
     return np.where(detected_minima)
+
+
+def rolling_mean(window_size, starting_value, x_series, y_series, max_x_value, roll_factor):
+    '''
+    :param window_size: how big is the window sliding over the dataset
+    :param starting_value: where does the sliding start
+    :param x_series: series of pandas dataframe containing the independent x values
+    :param y_series: series of pandas dataframe containing the dependent y values
+    :param max_x_value: where should the while loop stop, eg 100% Bax content or maximal ring length etc
+    :param roll_factor:in which increments should the window slide over the data
+    :return: rollmeans: the means for each slided window and rollmean_x: the according x values
+    '''
+    # x is the independent, y the dependent variable
+    x_slices = []
+    x_slice_indices = []
+    rollmeans = []
+    rollmean_x = []
+
+    # schleife mit stepsize
+    i = starting_value
+    while i < max_x_value:  # 100 is the maximal possible amount
+        # find all the x values in a certain window of the series (= slice)
+        x_slice = x_series[(x_series >= i) & (x_series < (i + window_size))].sort_values()  # find all the values between x and (x plus stepsize) and sort the list ascending
+        print(i)
+        print(x_slice)
+        x_slices.append(x_slice)
+
+        # find the index values of the x values in the slice
+        slice_index = x_slice.index
+        x_slice_indices.append(slice_index)
+        print(slice_index)
+
+        # find the according y values at the given indices
+        y_values = y_series.iloc[slice_index]
+        print(y_values)
+
+        # calculate the y mean in each y slice
+        mean = y_values.mean()
+        rollmeans.append(mean)
+
+        # create column with adequate window size
+        rollmean_x.append(i)
+
+        i += window_size / roll_factor  # increase i with window size durch 2 oder 4 etc um wirklich nen rolling zu haben!!!
+
+    print(x_slices)
+    print(x_slice_indices)
+    print(rollmeans)
+    print(len(rollmeans))
+    print(len(rollmean_x))
+
+    return rollmeans, rollmean_x
