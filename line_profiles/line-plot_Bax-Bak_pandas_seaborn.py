@@ -40,7 +40,7 @@ def main():
     plt.tick_params(direction='inout', length=6, width=2, colors='k') #, grid_color='r', grid_alpha=0.5) #direction : {'in', 'out', 'inout'}: Puts ticks inside the axes, outside the axes, or both.
 
     plt.xlabel('length [µm]', fontsize=32)
-    plt.ylabel('normalized fluorescence intensity [a.u.]', fontsize=32)
+    plt.ylabel(' raw fluorescence intensity [a.u.]', fontsize=32)
     # plt.legend(fontsize=28, title_fontsize=24, loc="upper right")
     plt.tight_layout()
 
@@ -54,6 +54,7 @@ def df_from_csv():
     df = pd.read_csv(file)  # better already sort the csv manually before importing
     return df
 #####################################################################################################################
+
 
 if __name__ == '__main__':
     main()

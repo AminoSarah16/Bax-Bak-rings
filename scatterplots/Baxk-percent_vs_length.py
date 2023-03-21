@@ -84,6 +84,8 @@ def main():
     # wie weit soll die y axe gehen
     plt.ylim(0, 100)
     # plt.legend(labels=["BAX", "BAK"], fontsize=16, title_fontsize=20, loc='upper right')
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
 
     #second y axis für Bax
     ax2 = plt.twinx()
@@ -96,6 +98,9 @@ def main():
 
     # add 50% line
     plt.axhline(y=50, color='black', linestyle='-')
+
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
 
     #erstlle den Plot
     plt.plot()

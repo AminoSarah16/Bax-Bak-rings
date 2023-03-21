@@ -28,7 +28,7 @@ def main():
 
     ###### calculate min and max intensity of all the rings in this replicate #####################
     Bax_min = min_max["Bax min"].min()  # in order to calculate the min of the Bax values
-    Bak_min = min_max["Bak min"].min()  # in order to calculate the min of the Bax values
+    Bak_min = min_max["Bak min"].min()  # in order to calculate the min of the Bak values
     Bax_max = min_max["Bax max"].max()
     Bak_max = min_max["Bak max"].max()
 

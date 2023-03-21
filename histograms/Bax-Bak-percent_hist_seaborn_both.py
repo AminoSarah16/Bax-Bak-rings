@@ -37,13 +37,21 @@ def main():
 
     # same for Both
     sns.set_style("ticks")
+    plt.figure(figsize=(9, 6))  # needs to be before the plot call
     hist = sns.displot(x=percent, hue=baxk, kde=False, palette=["#0EB30E", "#D10FD1"], binwidth=10, binrange=(0, 100), height=8.27, aspect=11.7/8.27, legend=False) # height=8.27, aspect=11.7/8.27 so stellt man die Größe beim displor ein, bei anderene gehts über figsize; das sind die Werte für A4 in inches
     # plt.title('BAX and BAK percents in the ring', y=0.97, fontsize=24) # y is a relative coordinate system. 1 is at the very top, 0.9 a little below and so on
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=20)
-    plt.xlabel('Amount of BAX or BAK [%]', fontsize=24)
-    plt.ylabel('Number of rings', fontsize=24)
-    plt.tick_params(direction='out', length=6, width=2, colors='k')
+    plt.xticks(fontsize=28, rotation=45)
+    plt.yticks(fontsize=28)
+
+    # sets params for the ticks themselves, not the labels
+    plt.tick_params(direction='inout', length=6, width=2,
+                    colors='k')  # , grid_color='r', grid_alpha=0.5) #direction : {'in', 'out', 'inout'}: Puts ticks inside the axes, outside the axes, or both.
+
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=20)
+    #plt.xlabel('Amount of BAX or BAK [%]', fontsize=24)
+    #plt.ylabel('Number of rings', fontsize=24)
+    #plt.tick_params(direction='out', length=6, width=2, colors='k')
     plt.tight_layout() #damits keine legends abschneidet und so
     # add the vertical line for the median
     plt.axvline(x=Bax_median, ymax=0.95, color='green', lw=2.5)
