@@ -78,6 +78,10 @@ def main():
     # ich will nur alle 0.5 Einheiten einen Tickmark
     plt.gca().yaxis.set_major_locator(plt.MultipleLocator(0.5))
 
+    #keine Axis labels
+    plot.set(xlabel=None)
+    plot.set(ylabel=None)
+
 
     plt.plot()
     plt.show()
