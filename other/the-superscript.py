@@ -1,6 +1,6 @@
 '''
 This program opens line plot raw csv files.
-Then calculates the relative Bax or Bak values by using the min-max-value csv created with Bax-Bak-min-max_over-replicate.py.
+Then calculates the relative Bax or Bak values by using the min-max-value csv created with determine-Bax-Bak-min-max_per-replicate.py.
 Then saves a new csv of these relative values.
 From this it then plots the line profile with matplotlib and saves it as png.
 It also caluclates the pearson value of Bax correlated to Bak and imprints it on the line plot.
@@ -27,7 +27,7 @@ def main():
     # let the user choose the folder containing the tables
     root_path = filedialog.askdirectory()  # prompts user to choose directory. From tkinter
 
-    ###### open the csv with all the min and max values from this repliccate, created with "Bax-Bak-min-max_over-replicate.py"
+    ###### open the csv with all the min and max values from this repliccate, created with "determine-Bax-Bak-min-max_per-replicate.py"
     result_path = os.path.join(root_path, 'results')
     if not os.path.isdir(result_path):
         os.makedirs(result_path)

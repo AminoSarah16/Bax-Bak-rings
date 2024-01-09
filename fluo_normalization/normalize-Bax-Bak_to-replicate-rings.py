@@ -1,12 +1,35 @@
 '''
-NORMALIZATION SCRIPT 2
+NORMALIZATION SCRIPT 2 - to normalize every ring to its replicate's min/max range
 This program opens line plot raw csv files.
-Then calculates the relative Bax or Bak values by using the min-max-value csv created with Bax-Bak-min-max_over-replicate.py.
+Then calculates the relative Bax or Bak values by using the min-max-value csv created with determine-Bax-Bak-min-max_per-replicate.py.
 Then saves a new csv of these relative values.
 From this it then plots the line profile with matplotlib and saves it as png.
 User needs to just run the script, everything is asked for.
-Göttingen, August 2022, Sarah Vanessa Schweighofer, MPI-NAT
+Göttingen, August 2022, Sarah Vanessa Schweighofer, MPI-NAT, (https://github.com/AminoSarah16)
+
+MIT License
+
+Copyright (c) 2022, Sarah Vanessa Schweighofer
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 '''
+
 
 import os
 from tkinter import filedialog
@@ -21,7 +44,7 @@ def main():
     # let the user choose the folder containing the tables
     root_path = filedialog.askdirectory()  # prompts user to choose directory. From tkinter
 
-    ###### open the csv with all the min and max values from this repliccate, created with "Bax-Bak-min-max_over-replicate.py"
+    ###### open the csv with all the min and max values from this repliccate, created with "determine-Bax-Bak-min-max_per-replicate.py"
     result_path = os.path.join(root_path, 'results')
     file_path = os.path.join(result_path, "mins_maxes.csv")
     min_max = pd.read_csv(file_path, encoding='latin1')  # better already sort the csv manually before importing

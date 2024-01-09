@@ -1,10 +1,32 @@
 '''
-NORMALIZATION SCRIPT 1
+NORMALIZATION SCRIPT 1 - to determine the values per replicate we need to normalize to
 This program opens csv files of ring line profiles raw data in one folder.
 Then reads out all Bax and Bak raw values and calculates the min and max for all the samples in the folder and saves it in a new csv.
 This can then be used to ormalize values to this general MIN/MAX values - see other scripts.
 User needs to just run the script, everything else is asked for.
-Göttingen, August 2022, Sarah Vanessa Schweighofer, MPI-NAT
+Göttingen, August 2022, Sarah Vanessa Schweighofer, MPI-NAT. (https://github.com/AminoSarah16)
+
+MIT License
+
+Copyright (c) 2022, Sarah Vanessa Schweighofer
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 '''
 
 import os
